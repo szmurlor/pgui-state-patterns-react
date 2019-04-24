@@ -79,6 +79,7 @@ class Form extends React.Component {
     this.setState({
       selected: selected
     });
+    
     // Both versions are WRONG! - this should go in componentDidUpdate...
     // 1. this.updateColor();
     // 2. setTimeout(() => {this.updateColor();}, 100);

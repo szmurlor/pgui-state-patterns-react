@@ -27,6 +27,13 @@ export var DataSet = {
         date: "2.09.2018",
         value: 15,
         expected: 50
+      },
+      {
+        id: 5,
+        name: "KO4514",
+        date: "26.04.2019",
+        value: 800,
+        expected: 511
       }
     ]
   };
