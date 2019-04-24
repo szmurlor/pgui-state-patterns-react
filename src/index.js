@@ -4,6 +4,52 @@ import { DataSet } from "./data.js";
 
 import "./styles.css";
 
+function Field(props) {
+  var readOnly = "editable" in props ? !props.editable : true;
+  return (
+    <li>
+      <span>{props.label}:</span>
+      <span>
+        <input
+          type="text"
+          readOnly={readOnly}
+          value={props.value}          
+        />
+      </span>
+    </li>
+  );
+}
+
+class Station extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    var s = this.props.station;
+    return (
+      <div className="details">
+        <form>
+          <ul>
+            <Field label="Identyfikator" value={s.name} />
+            <Field label="Data pomiaru" value={s.date} />
+            <Field label="Oczekiwana" value={s.expected} />
+            <Field
+              label="Zmierzona"
+              value={s.value}
+              editable={true}
+            />
+            <Field
+              label="Różnica"
+              value={s.value - s.expected || "-"} /* Wartość domyślna: "-" */
+            />
+          </ul>
+        </form>
+      </div>
+    );
+  }
+}
+
 class Form extends React.Component {
   render() {
     return (
@@ -27,9 +73,7 @@ class Form extends React.Component {
               </select>
             </div>
             <div className="col-4">
-                <div style={{border: "1px solid gray", width: "100%", height: "100%"}}>
-                Tutaj będzie informacja o stacji.
-                </div>              
+                <Station station={{}}/>
             </div>
           </div>
         </div>
