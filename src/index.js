@@ -13,7 +13,7 @@ function Field(props) {
         <input
           type="text"
           readOnly={readOnly}
-          value={props.value}          
+          value={props.value}               
         />
       </span>
     </li>
@@ -37,7 +37,7 @@ class Station extends React.Component {
             <Field
               label="Zmierzona"
               value={s.value}
-              editable={true}
+              editable={true}              
             />
             <Field
               label="Różnica"
@@ -51,6 +51,28 @@ class Station extends React.Component {
 }
 
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: undefined
+    };
+  }
+
+  selected = (e) => {
+    var selected = undefined;
+    var k = e.target.value;
+    for (var idx in DataSet.stations) {
+      var s = DataSet.stations[idx];
+      if (s.id === parseInt(k)) {
+        selected = s;
+        break;
+      }
+    }
+    this.setState({
+      selected: selected
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -61,6 +83,7 @@ class Form extends React.Component {
               <select
                 className="stations"
                 name="stations"
+                onChange={this.selected}
                 multiple
               >
                 {DataSet.stations.map(s => {
@@ -73,7 +96,10 @@ class Form extends React.Component {
               </select>
             </div>
             <div className="col-4">
-                <Station station={{}}/>
+                {this.state.selected ?
+                <Station station={{}}/> :
+                <div>Wybierz stację...</div>
+                }
             </div>
           </div>
         </div>
@@ -81,6 +107,6 @@ class Form extends React.Component {
     );
   }
 }
-
+this.state.selected
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Form />, rootElement);
