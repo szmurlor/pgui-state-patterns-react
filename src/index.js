@@ -11,6 +11,7 @@ function Field(props) {
       <span>{props.label}:</span>
       <span>
         <input
+          style={props.customStyle}
           type="text"
           readOnly={readOnly}
           value={props.value}   
@@ -19,6 +20,18 @@ function Field(props) {
         />
       </span>
     </li>
+  );
+}
+
+function VarianceField(props) {
+  var d = isNaN(props.value) ? "0" : props.value;
+  console.log('d = ' + d);
+  return (
+    <Field
+    customStyle={{color: d >=0 ? "black" : "red"}}
+    label="Różnica"
+    value={props.value} /* Wartość domyślna: "-" */
+  />
   );
 }
 
@@ -44,11 +57,7 @@ class Station extends React.Component {
                 this.props.onChangedValue(this.props.station, e.target.value);
               }}            
             />
-            <Field
-              id="input-expected"
-              label="Różnica"
-              value={s.value - s.expected || "-"} /* Wartość domyślna: "-" */
-            />
+            <VarianceField value={s.value - s.expected || "-"} />
           </ul>
         </form>
       </div>
@@ -78,22 +87,6 @@ class Form extends React.Component {
       selected: selected
     });
   };
-
-  /* Droga Reacta...*/
-  componentDidUpdate() {
-    //this.updateColor();
-  }
-
-  updateColor() {
-    var e = document.getElementById("input-expected");
-    var v = parseInt(e.value);
-    if (v >= 0) {
-      e.style.color = "black";
-    } else {
-      e.style.color = "red";
-    }
-  }
-
 
   onChangedValue = (station, v) => {
     if (this.state.selected && this.state.selected.id == station.id) {
