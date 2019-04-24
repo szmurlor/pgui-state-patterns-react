@@ -15,6 +15,7 @@ function Field(props) {
           readOnly={readOnly}
           value={props.value}   
           onChange={props.onChange}            
+          id={props.id}
         />
       </span>
     </li>
@@ -44,6 +45,7 @@ class Station extends React.Component {
               }}            
             />
             <Field
+              id="input-expected"
               label="Różnica"
               value={s.value - s.expected || "-"} /* Wartość domyślna: "-" */
             />
@@ -76,6 +78,22 @@ class Form extends React.Component {
       selected: selected
     });
   };
+
+  /* Droga Reacta...*/
+  componentDidUpdate() {
+    //this.updateColor();
+  }
+
+  updateColor() {
+    var e = document.getElementById("input-expected");
+    var v = parseInt(e.value);
+    if (v >= 0) {
+      e.style.color = "black";
+    } else {
+      e.style.color = "red";
+    }
+  }
+
 
   onChangedValue = (station, v) => {
     if (this.state.selected && this.state.selected.id == station.id) {
