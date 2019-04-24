@@ -13,7 +13,8 @@ function Field(props) {
         <input
           type="text"
           readOnly={readOnly}
-          value={props.value}               
+          value={props.value}   
+          onChange={props.onChange}            
         />
       </span>
     </li>
@@ -37,7 +38,10 @@ class Station extends React.Component {
             <Field
               label="Zmierzona"
               value={s.value}
-              editable={true}              
+              editable={true}  
+              onChange={e => {
+                this.props.onChangedValue(this.props.station, e.target.value);
+              }}            
             />
             <Field
               label="Różnica"
@@ -73,6 +77,20 @@ class Form extends React.Component {
     });
   };
 
+  onChangedValue = (station, v) => {
+    if (this.state.selected && this.state.selected.id == station.id) {
+      this.setState(state => {
+        if (!v || isNaN(v)) {
+          state.selected.value = 0;
+        } else {
+          state.selected.value = parseInt(v);
+        }
+
+        return state;
+      });
+    }
+  };
+
   render() {
     return (
       <div className="App">
@@ -97,7 +115,8 @@ class Form extends React.Component {
             </div>
             <div className="col-4">
                 {this.state.selected ?
-                <Station station={{}}/> :
+                <Station station={this.state.selected}
+                onChangedValue={this.onChangedValue} /> :
                 <div>Wybierz stację...</div>
                 }
             </div>
@@ -107,6 +126,6 @@ class Form extends React.Component {
     );
   }
 }
-this.state.selected
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Form />, rootElement);
