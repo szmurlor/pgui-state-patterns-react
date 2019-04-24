@@ -1,0 +1,35 @@
+{
+  "name": "state-patterns-react",
+  "version": "1.0.0",
+  "description": "Program demonstracyjny prezentujący typowe wzorce inter4fejsu użytkwonika.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --mode development --open --hot"
+  },
+  "keywords": [
+    "React",
+    "State",
+    "Pattern"
+  ],
+  "author": "Robert Szmurlo",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.3",
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.1",
+    "react-hot-loader": "^4.8.4",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
