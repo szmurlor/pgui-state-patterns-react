@@ -5,8 +5,12 @@ import { DataSet } from "./data.js";
 import "./styles.css";
 
 function Field(props) {
+  /* Filtrujemy z propsów właściwości, które używamy jawnie. */
   var {label, editable, onChange, value, ...props} = props;
+
+  /* Ustawiamy wartość domyślną readOnly - jak nie podana, to True */
   var readOnly = editable == undefined ? true : !editable;
+
   return (
     <li>
       <span>{label}:</span>
@@ -16,7 +20,7 @@ function Field(props) {
           readOnly={readOnly}
           value={value}   
           onChange={onChange}            
-          {...props}
+          {...props} /* To jest 'spread operator', za pomoca którego przekazujemy wszystkie propsy... */
         />
       </span>
     </li>
