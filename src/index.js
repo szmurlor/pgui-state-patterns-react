@@ -5,18 +5,18 @@ import { DataSet } from "./data.js";
 import "./styles.css";
 
 function Field(props) {
-  var readOnly = "editable" in props ? !props.editable : true;
+  var {label, editable, onChange, value, ...props} = props;
+  var readOnly = editable == undefined ? true : !editable;
   return (
     <li>
-      <span>{props.label}:</span>
+      <span>{label}:</span>
       <span>
         <input
-          style={props.customStyle}
           type="text"
           readOnly={readOnly}
-          value={props.value}   
-          onChange={props.onChange}            
-          id={props.id}
+          value={value}   
+          onChange={onChange}            
+          {...props}
         />
       </span>
     </li>
@@ -28,7 +28,7 @@ function VarianceField(props) {
   console.log('d = ' + d);
   return (
     <Field
-    customStyle={{color: d >=0 ? "black" : "red"}}
+    style={{color: d >=0 ? "black" : "red"}}
     label="Różnica"
     value={props.value} /* Wartość domyślna: "-" */
   />
